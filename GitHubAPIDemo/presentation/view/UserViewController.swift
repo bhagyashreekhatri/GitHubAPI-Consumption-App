@@ -19,28 +19,70 @@ class UserTableViewCell: UITableViewCell {
 class UserViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var userListView: UIView!
+    @IBOutlet weak var searchView: UIVisualEffectView!
     let presenter = UserPresenter(userService: UserService())
     var usersList = [UsersModel]()
     var userDetails  : UserDetailModel?
+    var userName = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView?.dataSource = self
-        tableView?.delegate = self
-        activityIndicator?.hidesWhenStopped = true
-        
-        presenter.attachView(view: self)
-        presenter.getUsersList()
+        config()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        emptyTextfields(textField: searchTextField)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: - IBActions
+    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        searchView.isHidden = false
+        userListView.isHidden = true
+    }
+    
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        searchView.isHidden = true
+        userListView.isHidden = false
+    }
+    
+    
+    @IBAction func allUsersTapped(_ sender: UIBarButtonItem) {
+        presenter.getUsersList()
+    }
+    
+    //MARK: - Custom Functions
+    func config(){
+        tableView?.dataSource = self
+        tableView?.delegate = self
+        searchTextField?.delegate = self
+        activityIndicator?.hidesWhenStopped = true
+        searchView.isHidden = true
+        presenter.attachView(view: self)
+        presenter.getUsersList()
+    }
+    
+    func validations(){
+        if userName.isEmpty {
+            showError(errorMessage: "Please enter user name!!")
+        }
+        else{
+            presenter.searchUsersList(userName:userName)
+        }
+    }
+    
+    func emptyTextfields (textField: UITextField){
+        textField.text = ""
+    }
 }
 
+//MARK: - UITableView Delegates & DataSoruce
 extension UserViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersList.count
@@ -71,10 +113,12 @@ extension UserViewController: UITableViewDataSource,UITableViewDelegate {
     
 }
 
+//MARK: - Protocols Implementation
 extension UserViewController: UserView {
     func setUsers(users: [UsersModel]) {
         usersList = users
-        tableView?.isHidden = false
+        userListView.isHidden = false
+        searchView.isHidden = true
         tableView?.reloadData()
     }
     
@@ -99,8 +143,29 @@ extension UserViewController: UserView {
         activityIndicator?.stopAnimating()
     }
     
+    func showError(errorMessage: String){
+        Helper.showToast(controller: self, message: errorMessage)
+    }
+    
 }
 
+//MARK: - UITextfield Delegate
+extension UserViewController: UITextFieldDelegate {
+   
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let username = textField.text{
+            userName = username
+        }
+        validations()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+//MARK: - UIImageView
 extension UIImageView {
     
     func setRounded() {

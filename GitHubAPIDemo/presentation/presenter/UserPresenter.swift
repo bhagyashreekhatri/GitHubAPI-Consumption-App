@@ -11,6 +11,7 @@ import Foundation
 protocol UserView: NSObjectProtocol {
     func startLoading()
     func finishLoading()
+    func showError(errorMessage: String)
     func setUsers(users: [UsersModel])
     func setUserDetails(userDetails: UserDetailModel)
     func setEmptyUsers()
@@ -45,8 +46,30 @@ class UserPresenter {
                 }
             },
             onFailure: { (errorMessage) in
+                self.userView?.setEmptyUsers()
                 self.userView?.finishLoading()
+                self.userView?.showError(errorMessage: errorMessage)
             }
+        )
+    }
+    
+    func searchUsersList(userName:String) {
+        self.userView?.startLoading()
+        userService.callAPISearchUser(userName:userName,
+            onSuccess: { (users) in
+                self.userView?.finishLoading()
+                if(users.count == 0){
+                    self.userView?.setEmptyUsers()
+                }
+                else{
+                    self.userView?.setUsers(users: users)
+                }
+        },
+            onFailure: { (errorMessage) in
+                self.userView?.setEmptyUsers()
+                self.userView?.finishLoading()
+                self.userView?.showError(errorMessage: errorMessage)
+        }
         )
     }
     
@@ -59,6 +82,7 @@ class UserPresenter {
         },
             onFailure: { (errorMessage) in
                 self.userView?.finishLoading()
+                self.userView?.showError(errorMessage: errorMessage)
         }
         )
     }

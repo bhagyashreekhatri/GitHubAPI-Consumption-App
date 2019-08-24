@@ -17,16 +17,15 @@ class UserDetailViewController: UIViewController {
     @IBOutlet weak var userReposLabel: UILabel!
     @IBOutlet weak var userFollowersLabel: UILabel!
     @IBOutlet weak var usersFollowingLabel: UILabel!
-    
     var userDetails  : UserDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        uiConfig()
+        config()
     }
     
-    func uiConfig(){        
+    //MARK: Custom Functions
+    func config(){
         userNameLabel.text = userDetails?.name ?? "No data available"
         userCompanyLabel.text = userDetails?.company ?? "No data available"
         let publicRepos = userDetails?.public_repos ?? 0

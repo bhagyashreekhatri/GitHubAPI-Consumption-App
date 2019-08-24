@@ -22,6 +22,7 @@ class APICallManager {
     
     enum Endpoint: String {
         case Users = "/users"
+        case SearchUser = "/search/users"
     }
     
     // MARK: GET USERS LIST API
@@ -57,6 +58,33 @@ class APICallManager {
             }
         )
     }
+    
+    // MARK: GET SEARCH USER API
+    func callAPISearchUser(userName:String,onSuccess successCallback: ((_ users: [UsersModel]) -> Void)?,
+                         onFailure failureCallback: ((_ errorMessage: String) -> Void)?) {
+        
+        // Build URL
+        let url = API_BASE_URL + Endpoint.SearchUser.rawValue + "?q=" + userName
+        
+        // call API
+        self.createRequest(
+            url, method: .get, headers: nil, parameters: nil,
+            onSuccess: {(responseObject: JSON) -> Void in
+                // Create dictionary
+                if let response = responseObject.dictionaryObject{
+                    let userDict = UsersModel.loadFromArraysDictionary(response: response as [String : AnyObject])
+                    successCallback?(userDict)
+                }
+                else {
+                    failureCallback?("An error has occured.")
+                }
+        },
+            onFailure: {(errorMessage: String) -> Void in
+                failureCallback?(errorMessage)
+        }
+        )
+    }
+    
     
     // MARK: GET USER DETAILS API
     func callAPIGetUserDetail(userName:String,onSuccess successCallback: ((_ user: UserDetailModel) -> Void)?,

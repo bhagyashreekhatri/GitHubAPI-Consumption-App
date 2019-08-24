@@ -28,6 +28,7 @@ class UsersModel {
     var type: String?
     var site_admin: Bool?
     
+    
     // MARK: Instance Method
     func loadFromDictionary(_ dict: [String: AnyObject]) {
         if let login = dict["login"] as? String {
@@ -91,6 +92,18 @@ class UsersModel {
         let user = UsersModel()
         user.loadFromDictionary(dict)
         return user
+    }
+    
+    
+    class func loadFromArraysDictionary(response: [String: AnyObject]) -> [UsersModel]{
+        var data = [UsersModel]()
+        if let userDict = response["items"] as? NSArray {
+            for item in userDict {
+                let single = UsersModel.build(item as! [String : AnyObject])
+                data.append(single)
+            }
+        }
+        return data
     }
 }
 

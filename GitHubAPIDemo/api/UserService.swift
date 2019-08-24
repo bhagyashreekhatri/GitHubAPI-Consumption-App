@@ -23,10 +23,22 @@ class UserService {
     }
     
     public func callAPIGetUserDetail(userName:String,onSuccess successCallback: ((_ user: UserDetailModel) -> Void)?,
-                                        onFailure failureCallback: ((_ errorMessage: String) -> Void)?) {
+                                     onFailure failureCallback: ((_ errorMessage: String) -> Void)?) {
         APICallManager.instance.callAPIGetUserDetail(userName:userName,
             onSuccess: { (user) in
                 successCallback?(user)
+        },
+            onFailure: { (errorMessage) in
+                failureCallback?(errorMessage)
+        }
+        )
+    }
+    
+    public func callAPISearchUser(userName:String,onSuccess successCallback: ((_ users: [UsersModel]) -> Void)?,
+                                onFailure failureCallback: ((_ errorMessage: String) -> Void)?) {
+        APICallManager.instance.callAPISearchUser(userName:userName,
+            onSuccess: { (users) in
+                successCallback?(users)
         },
             onFailure: { (errorMessage) in
                 failureCallback?(errorMessage)

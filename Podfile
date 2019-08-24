@@ -9,6 +9,7 @@ target 'GitHubAPIDemo' do
   pod 'SwiftyJSON', '3.1.4'
   pod 'Alamofire', '4.2.0'
   pod 'Kingfisher', '4.10.1'
+  pod 'DCToastView'
   
   target 'GitHubAPIDemoTests' do
     inherit! :search_paths

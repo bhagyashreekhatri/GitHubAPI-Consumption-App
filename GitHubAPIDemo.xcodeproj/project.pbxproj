@@ -43,6 +43,9 @@
 		25AAB886230EC50700AFA279 /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AAB885230EC50700AFA279 /* UserDetailModel.swift */; };
 		25AAB887230EC50700AFA279 /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AAB885230EC50700AFA279 /* UserDetailModel.swift */; };
 		25AAB888230EC50700AFA279 /* UserDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AAB885230EC50700AFA279 /* UserDetailModel.swift */; };
+		25BCFF34230FE738006E1660 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCFF33230FE738006E1660 /* Helper.swift */; };
+		25BCFF35230FE738006E1660 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCFF33230FE738006E1660 /* Helper.swift */; };
+		25BCFF36230FE738006E1660 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BCFF33230FE738006E1660 /* Helper.swift */; };
 		43F813973D3976A35839FECB /* Pods_GitHubAPIDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD4A2B2CBED097CBACD02C8 /* Pods_GitHubAPIDemo.framework */; };
 		A4E854BD2DA429EB312A460D /* Pods_GitHubAPIDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2997CD0DEEBD6B4552F2FC45 /* Pods_GitHubAPIDemoUITests.framework */; };
 		E7BDAB9ABEC458B2EFC07067 /* Pods_GitHubAPIDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790E7D57C1BF1514C37B5673 /* Pods_GitHubAPIDemoTests.framework */; };
@@ -87,6 +90,7 @@
 		25AAB87F230EBD9400AFA279 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		25AAB881230EC3A300AFA279 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		25AAB885230EC50700AFA279 /* UserDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailModel.swift; sourceTree = "<group>"; };
+		25BCFF33230FE738006E1660 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		2997CD0DEEBD6B4552F2FC45 /* Pods_GitHubAPIDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubAPIDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D6BFBC3FBECCB14D8CC831B /* Pods-GitHubAPIDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubAPIDemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubAPIDemoUITests/Pods-GitHubAPIDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5288912B9A78BD18A138E709 /* Pods-GitHubAPIDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubAPIDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubAPIDemo/Pods-GitHubAPIDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 		25AAB81D230E393800AFA279 /* GitHubAPIDemo */ = {
 			isa = PBXGroup;
 			children = (
+				25BCFF32230FE70B006E1660 /* helpers */,
 				25AAB85C230EAF1300AFA279 /* api */,
 				25AAB853230EAF1300AFA279 /* model */,
 				25AAB856230EAF1300AFA279 /* presentation */,
@@ -223,6 +228,14 @@
 				25AAB85E230EAF1300AFA279 /* APICallManager.swift */,
 			);
 			path = api;
+			sourceTree = "<group>";
+		};
+		25BCFF32230FE70B006E1660 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				25BCFF33230FE738006E1660 /* Helper.swift */,
+			);
+			path = helpers;
 			sourceTree = "<group>";
 		};
 		DCE82FB2B836F6167C9255AF /* Frameworks */ = {
@@ -397,6 +410,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GitHubAPIDemo/Pods-GitHubAPIDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DCToastView/DCToastView.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -405,6 +419,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DCToastView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -494,6 +509,7 @@
 				25AAB886230EC50700AFA279 /* UserDetailModel.swift in Sources */,
 				25AAB875230EAF1300AFA279 /* APICallManager.swift in Sources */,
 				25AAB872230EAF1300AFA279 /* UserService.swift in Sources */,
+				25BCFF34230FE738006E1660 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +522,7 @@
 				25AAB873230EAF1300AFA279 /* UserService.swift in Sources */,
 				25AAB86A230EAF1300AFA279 /* UserPresenter.swift in Sources */,
 				25AAB887230EC50700AFA279 /* UserDetailModel.swift in Sources */,
+				25BCFF35230FE738006E1660 /* Helper.swift in Sources */,
 				25AAB883230EC3A300AFA279 /* UserDetailViewController.swift in Sources */,
 				25AAB864230EAF1300AFA279 /* UsersModel.swift in Sources */,
 				25AAB876230EAF1300AFA279 /* APICallManager.swift in Sources */,
@@ -522,6 +539,7 @@
 				25AAB874230EAF1300AFA279 /* UserService.swift in Sources */,
 				25AAB86B230EAF1300AFA279 /* UserPresenter.swift in Sources */,
 				25AAB888230EC50700AFA279 /* UserDetailModel.swift in Sources */,
+				25BCFF36230FE738006E1660 /* Helper.swift in Sources */,
 				25AAB884230EC3A300AFA279 /* UserDetailViewController.swift in Sources */,
 				25AAB865230EAF1300AFA279 /* UsersModel.swift in Sources */,
 				25AAB877230EAF1300AFA279 /* APICallManager.swift in Sources */,
