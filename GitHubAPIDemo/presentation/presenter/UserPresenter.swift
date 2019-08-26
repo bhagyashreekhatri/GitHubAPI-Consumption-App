@@ -37,18 +37,22 @@ class UserPresenter {
         self.userView?.startLoading()
         userService.callAPIGetUsers(
             onSuccess: { (users) in
-                self.userView?.finishLoading()
-                if(users.count == 0){
-                   self.userView?.setEmptyUsers()
-                }
-                else{
-                     self.userView?.setUsers(users: users)
+                DispatchQueue.main.async {
+                    self.userView?.finishLoading()
+                    if(users.count == 0){
+                        self.userView?.setEmptyUsers()
+                    }
+                    else{
+                        self.userView?.setUsers(users: users)
+                    }
                 }
             },
             onFailure: { (errorMessage) in
-                self.userView?.setEmptyUsers()
-                self.userView?.finishLoading()
-                self.userView?.showError(errorMessage: errorMessage)
+                DispatchQueue.main.async {
+                    self.userView?.setEmptyUsers()
+                    self.userView?.finishLoading()
+                    self.userView?.showError(errorMessage: errorMessage)
+                }
             }
         )
     }
@@ -57,18 +61,22 @@ class UserPresenter {
         self.userView?.startLoading()
         userService.callAPISearchUser(userName:userName,
             onSuccess: { (users) in
+                DispatchQueue.main.async {
                 self.userView?.finishLoading()
-                if(users.count == 0){
-                    self.userView?.setEmptyUsers()
-                }
-                else{
-                    self.userView?.setUsers(users: users)
+                    if(users.count == 0){
+                        self.userView?.setEmptyUsers()
+                    }
+                    else{
+                        self.userView?.setUsers(users: users)
+                    }
                 }
         },
             onFailure: { (errorMessage) in
-                self.userView?.setEmptyUsers()
-                self.userView?.finishLoading()
-                self.userView?.showError(errorMessage: errorMessage)
+                DispatchQueue.main.async {
+                    self.userView?.setEmptyUsers()
+                    self.userView?.finishLoading()
+                    self.userView?.showError(errorMessage: errorMessage)
+                }
         }
         )
     }
@@ -77,13 +85,16 @@ class UserPresenter {
         self.userView?.startLoading()
         userService.callAPIGetUserDetail(userName:userName,
             onSuccess: { (userDetailsResponse) in
-                self.userView?.finishLoading()
-                self.userView?.setUserDetails(userDetails: userDetailsResponse)
+                DispatchQueue.main.async {
+                    self.userView?.finishLoading()
+                    self.userView?.setUserDetails(userDetails: userDetailsResponse)
+                }
         },
             onFailure: { (errorMessage) in
-                self.userView?.finishLoading()
-                self.userView?.showError(errorMessage: errorMessage)
-        }
-        )
+                DispatchQueue.main.async {
+                    self.userView?.finishLoading()
+                    self.userView?.showError(errorMessage: errorMessage)
+                }
+        })
     }
 }

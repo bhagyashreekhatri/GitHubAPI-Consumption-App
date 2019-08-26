@@ -32,10 +32,6 @@ class UserViewController: UIViewController {
         config()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        emptyTextfields(textField: searchTextField)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -43,6 +39,7 @@ class UserViewController: UIViewController {
     
     //MARK: - IBActions
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        emptyTextfields(textField: searchTextField)
         searchView.isHidden = false
         userListView.isHidden = true
     }
